@@ -6,7 +6,12 @@ from utils import get_base_url
 # port may need to be changed if there are multiple flask servers running on same server
 port = 12345
 base_url = get_base_url(port)
-app = Flask(__name__, static_url_path=base_url+'static')
+
+# if the base url is not empty, then the server is running in development, and we need to specify the static folder so that the static files are served
+if base_url == '':
+    app = Flask(__name__, static_url_path=base_url+'static')
+else:
+    app = Flask(__name__)
 
 # set up the routes and logic for the webserver
 @app.route(f'{base_url}/')
