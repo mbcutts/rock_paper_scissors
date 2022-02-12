@@ -1,7 +1,21 @@
 # Universal Project Scaffold
 A scaffold for deploying dockerized flask applications.
 
-### Quickstart Guide
+### Quickstart Guide for Local Development
+
+cd into the `/app` folder
+
+`python3 -m pip install -r requirementx.txt`
+
+edit line 29 the `main.py` file to either the URL of the cocalc server you are on or `127.0.0.1` if you are running it on your own PC
+
+run
+ 
+ `python3 -m main`
+
+to start the server on local, most changes while developing will be picked up in realtime by the server
+
+### Quickstart Guide for Local Deployment
 
 Make sure docker is installed on your system. Look that up if you don't know what that means.
 
