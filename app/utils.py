@@ -10,6 +10,7 @@ def get_base_url(port:int) -> str:
     Inputs: port (int) - the port number of the webserver
     Outputs: base_url (str) - the base url to the webserver
     '''
+    
     try:
         info = json.load(open(os.path.join(os.environ['HOME'], '.smc', 'info.json'), 'r'))
         project_id = info['project_id']
