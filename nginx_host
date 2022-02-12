@@ -1,17 +1,10 @@
-upstream uwsgicluster {
-    server 127.0.0.1:8080;
+upstream gunicorn {
+    server web:5000;
 }
-
-# Configuration for Nginx
 server {
-    # Running port
     listen 80;
-
-    # Proxying connections to application servers
     location / {
-        include            uwsgi_params;
-        uwsgi_pass         uwsgicluster;
-
+        proxy_pass http://gunicorn;
         proxy_redirect     off;
         proxy_set_header   Host $host;
         proxy_set_header   X-Real-IP $remote_addr;

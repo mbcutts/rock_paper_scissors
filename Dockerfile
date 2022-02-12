@@ -1,18 +1,34 @@
 FROM python:3.8-slim-buster
 USER root
 
+RUN apt-get update &&\
+    apt-get install\
+    gcc\
+    musl-dev\
+    nano\
+    nginx\
+    python3-dev\
+    python3-pip\
+    systemd\
+    unzip\
+    zip\
+    -y \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+ADD nginx_host /etc/nginx/sites-enabled/default
+ADD entrypoint.sh /entrypoint.sh
+
+RUN wget https://bootstrap.pypa.io/get-pip.py \
+    && python3 get-pip.py \
+    && python3 -m pip install -U pip \
+    && python3 -m pip install -r /app/requirements.txt \
+	&& rm get-pip.py
+
 COPY ./app /app
-
-RUN apt-get update
-RUN apt-get install nginx python3-pip python3-dev zip gcc musl-dev unzip nano systemd -y
-
-RUN pip3 install --upgrade pip
-RUN pip3 install -r /app/requirements.txt
-RUN pip3 install uwsgi
-
-COPY nlp /etc/nginx/sites-enabled/default
-COPY entrypoint.sh /entrypoint.sh
+WORKDIR /app
 
 EXPOSE 80
 RUN chmod +x entrypoint.sh
-CMD  ["./entrypoint.sh"]
+CMD  ["/entrypoint.sh"]
