@@ -1,57 +1,41 @@
-# nlp_writer_scaffold
-A scaffold for deploying dockerized flask applications showing student natural language processing projects using aitextgen and pytorch.
+# Universal Project Scaffold
+A scaffold for deploying dockerized flask applications.
 
 ### File Structure
-The files/directories which you will need to edit are **bolded**, and the files you may need to edit are *italicized*.
-DO NOT TOUCH OTHER FILES.
+The files/directories which you will need to edit are **bolded**
+
+**DO NOT TOUCH OTHER FILES. THIS MAY RESULT IN YOUR PROJECT BEING UNABLE TO RUN**
 
 - .gitignore
 - Dockerfile
 - READMD.md
 - entrypoint.sh
-- nlp
+- nginx_host
 - app/
      - **main.py**
      - **pytorch_model.bin** <- you will need to upload this yourself after cloning the repo when developing the site
-     - *requirements.txt*
-     - simple_site.py
-     - st_app.py
+     - **requirements.txt**
      - utils.py
-     - uwsgi.ini
-     - wsgi.py
-     - **weights_location**
-     - static/
-          - **images/**
-          - *Home.css*
-          - *Results.css*
-          - *Write-your-story-with-AI.css*
-          - jquery.js
-          - nicepage.css
-          - nicepage.js
-          - text_gen.js
-          - duck.gif
-          - duck2.gif
-          - loader.gif
-          - puppy.jpg
      - templates/
-          - **Write-your-story-with-AI.html**
-          - **writer_home.html**
-          - simple_index.html
+          - **index.html**
 ### pytorch_model.bin ###
-The weights file - must upload if you are running file on coding center.
-### st_app.py ###
-Has code for streamlit.
+The weights file - must upload if you are running file on coding center or are trying to deploy.
 ### main.py ###
 Contains the main flask app itself.
 ### requirements.txt ###
 Contains list of packages and modules required to run the flask app. Edit only if you are using additional packages that need to be pip installed in order to run the project.
+
+To generate a requirements.txt file you can run
+
+`pip list --format=freeze > app/requirements.txt`
+
+the requirements.txt file will then be updated. Keep in mind: some packages you install on one operating system may not be available on another. You will have to debug and resolve this yourself if this is the case.
 ### static/ ###
-Contains the static images, CSS, & JS files used by the flask app for the webpage. Home.css is for the landing page, Results.css is for the landing page. Place all your images used for your website in static/images/.
+Contains the static images, CSS, & JS files used by the flask app for the webpage. You will need to create this and put files in it. Place all your images used for your website in static/images/ so that you can then reference them in your html files.
 ### templates/ ###
-Contains the HTML pages used for the webpage. Edit these to fit your project. writer_home.html is the landing page, Write-your-story-with-AI.html is the result page.
+Contains the HTML pages used for the webpage. Edit these to fit your project. index.html is the demo page.
 ### Files used for deployment ###
 `Dockerfile`
-`uwsgi.ini`
-`wsgi.py`
-`nlp`
-Do not touch these files.
+`entrypoint.sh`
+`nginx_host`
+**Do not touch these files.**

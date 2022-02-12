@@ -27,8 +27,8 @@ RUN wget https://bootstrap.pypa.io/get-pip.py \
 	&& rm get-pip.py
 
 COPY ./app /app
-WORKDIR /app
+RUN chmod +x entrypoint.sh && chmod -R 755 /app
 
 EXPOSE 80
-RUN chmod +x entrypoint.sh
+WORKDIR /app
 CMD  ["/entrypoint.sh"]
