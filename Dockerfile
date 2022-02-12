@@ -19,9 +19,10 @@ RUN apt-get update &&\
     && apt-get clean -y\
     && rm -rf /var/lib/apt/lists/*
 
-# copy nginx configuration file and entrypoint to be used when starting Docker container
+# copy nginx configuration file, pip requirements, and entrypoint to be used when starting Docker container
 ADD nginx_host /etc/nginx/sites-enabled/default
 ADD entrypoint.sh /entrypoint.sh
+ADD app/requirements.txt /app/requirements.txt
 
 # install pip and dependencies
 RUN wget https://bootstrap.pypa.io/get-pip.py \
