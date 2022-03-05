@@ -52,6 +52,7 @@ The files/directories which you will need to edit are **bolded**
 - READMD.md
 - entrypoint.sh
 - nginx_host
+- host_config
 - app/
      - **main.py**
      - **pytorch_model.bin** <- you will need to upload this yourself after cloning the repo when developing the site
@@ -81,4 +82,5 @@ Contains the HTML pages used for the webpage. Edit these to fit your project. in
 `Dockerfile`
 `entrypoint.sh`
 `nginx_host`
-**Do not touch these files.**
+`host_config`
+**Only modify `host_config`. Do not touch the other files.**
