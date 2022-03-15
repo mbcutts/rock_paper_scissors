@@ -7,7 +7,7 @@ cd into the `/app` folder
 
 `python3 -m pip install -r requirements.txt`
 
-edit line 29 the `main.py` file to either the URL of the cocalc server you are on or `127.0.0.1` if you are running it on your own PC
+edit line 29 the `main.py` file to either the URL of the cocalc server you are on or `localhost` if you are running it on your own PC
 
 run
  
