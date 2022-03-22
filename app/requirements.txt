@@ -1,2 +1,9 @@
-Flask
+Pillow
+pandas
+numpy
+flask
+werkzeug
+requests
+opencv-python
 gunicorn
+utils
