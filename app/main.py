@@ -13,9 +13,9 @@ base_url = get_base_url(port)
 
 # if the base url is not empty, then the server is running in development, and we need to specify the static folder so that the static files are served
 if base_url == '/':
-    app = Flask(__name__, static_url_path=base_url+'static')
-else:
     app = Flask(__name__)
+else:
+    app = Flask(__name__, static_url_path=base_url+'static')
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
