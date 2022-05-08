@@ -21,7 +21,7 @@
                 <img src="{{ url_for('static', filename='images1/ai camp logo1.svg')}}" width="55" height="55" alt="">
               </a>
             <a class="navbar-brand " href="/#">
-                <h3 class="colored-text">Emotion Detector</h3>
+                <h3 class="colored-text">Rock Paper Scissors</h3>
             </a>
             <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,37 +39,16 @@
                             <div class="dropdown-menu" aria-labelledby="navbarWelcome">
                                  <a class="dropdown-item " target="_blank" href="https://github.com/zikegcwk/aicamp_emotion">
                                     Github Repo
-                                </a>
-                                <a class="dropdown-item " target="_blank" href="https://medium.com/@beatrice.miha/i-learned-how-to-learn-dive-into-the-deepest-ocean-3add9449eb7e">
-                                    Beatrice's Post
-                                </a> 
-                                <a class="dropdown-item " target="_blank" href="https://medium.com/@thomaschen395/how-ai-camp-prepared-me-for-the-real-world-7f2a8c28cde5">
-                                    Thomas's Post
-                                </a>
+                              </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="/#home" class="nav-link colored-text">
+                            <a href="{{url_for('home')}}" class="nav-link colored-text">
                                 Home
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="/#demo" class="nav-link colored-text">
-                                Demo
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="/#meet_the_team" class="nav-link colored-text">
-                                The Team
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="/#our_work" class="nav-link colored-text">
-                                Our Work
                             </a>
                         </li>
                     </ul>
                 <ul class="ml-lg-auto list-unstyled m-0 nav-btn">
-                    <li><a href="https://michaelzhang1.typeform.com/to/LWIfVW1H?typeform-source=www.ai-camp.org" target="_blank" class="btn btn-green btn-circled btn-two">Register for AI Camp</a></li>
+                    <li><a href="https://michaelzhang1.typeform.com/to/LWIfVW1H?typeform-source=www.ai-camp.org" target="_blank" class="btn btn-green btn-circled btn-two">Made by Joseph Yun at AI Camp</a></li>
                 </ul>
             </div> <!-- / .navbar-collapse -->
         </div> <!-- / .Container -->
@@ -79,46 +58,57 @@
             <div class="container">  
         <div class="row">
                 <div class="col justify-content-center align-items-center text-center">
-                    <h3 class="section-title display-4">Recognition Results</h3>
-                    <h3 class="we-found btn-text display-4">We found <strong><span style='text-transform: capitalize;'>{{labels}}!</span></strong></h3>
-
-                    {% if labels == 'no emotion' %}
-                    <div>We missed? See why below.</div>
+                    {% if did_win == True %}
+                    <h2 class="section-title display-4">Your rock, paper, scissors results: <br> </h2>
+                    <h3><strong> YOU WON! </strong> </h3>
                     {% else %}
-                    <div class="lead"><em>with {{ confidences }} confidence.</em></div>
+                    <h2 class="section-title display-4">Your rock, paper, scissors results: <br> </h3>
+                    <h3><strong> Better luck next time :( </strong> </h3>
+                    {% endif %}
+                  
+                    {% if labels == "No Emotion" %}
+                    <h3 class="we-found btn-text display-4">The computer couldn't detect any rock, paper, or scissors. Please try again. <br> <br> </h3>
+                  
+                    {% else %}
+                    <h3 class="we-found btn-text display-4">The computer detected your guess to be: <strong><span style='text-transform: capitalize;'>{{labels}}</span></strong></h3>
+                  
+                    {% if labels != None %}
+                    <p class="lead"><em>with {{ confidences }} confidence.</em></p>
+                    
+                    {% endif %}
+                    <h3 class="we-found btn-text display-4">The computer guessed: <strong><span style='text-transform: capitalize;'>{{computer_guess}}</span></strong></h3>
+
+                    <br> <br>
                     {% endif %}
 
-                    <a class="mb-0" id='seefood_button'>
-                        <form action="/" id='seefood_form' method=post enctype=multipart/form-data>
-                            <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
-                        </form>
-                        <button href="#" target="_blank" class="btn btn-white btn-circled btn-results btn-text">
-                            <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Next Photo
-                        </button>
-                    </a>
+                    <form id='seefood_form' method=post enctype=multipart/form-data>
+                        <p class="mb-1 text-dark">
+                        Select the difficulty for your next game of Rock, Paper, Scissors!
+                        </p>
+                        <input type="radio" id="easy" name="fav_language" value="easy">
+                        <label for="easy" class="mb-1 text-dark">Easy</label><br>
+                        <input type="radio" id="normal" name="fav_language" value="normal">
+                        <label for="normal" class="mb-1 text-dark">Normal</label><br>
+                        <input type="radio" id="extreme" name="fav_language" value="extreme">
+                        <label for="extreme" class="mb-1 text-dark">Extreme</label>
+                        <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
+                    </form>
+                 <br>
+                <a class="mb-0" id='seefood_button'>
+                    <button href="#" target="_blank" class="btn btn-secondary btn-circled btn-text">
+                        <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Play the game
+                    </button>
+                </a>
+                <br>
+                <br>
                 </div>
                 <div class="col">
-                    <img class="mbr-figure" src="{{ url_for('static', filename='uploads/' + filename)}}">
+                    <img class="mbr-figure" src="{{ url_for('static', filename='uploads/' + filename)}}" style="max-width: 100%; padding-bottom: 30px">
                 </div>
                 </div>
             </div>
     </section>
 
-    <section class="mbr-section mbr-section-nopadding" id="services-2" data-rv-view="5" style="padding-top: 60px; margin-top: 60px; padding-bottom: 60px">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6 text-center">
-                    <h3 class="section-title display-4 results-title">Why do we miss sometimes?</h3>
-
-                    <div class="lead">
-                        <p class="section-text results-text">Given just three weeks, we only had time to train our model with 5 emotions on about 6.7k labeled data. If we have more time, we can improve our model performance!&nbsp;</p>
-                    </div>
-
-                </div>
-                <div class="col-sm-12 col-lg-6">
-                    <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/clem-5-emo-ncm-671x690.jpg')}}">
-                </div>
-            </div>
-    </section>
 
     <footer id="footer">
         <div class="overlay footer-overlay"></div>
@@ -134,40 +124,19 @@
                         <h1>Learn AI in three weeks with zero coding experience.</h1>
                         <p>AI Camp teaches middle and high school students machine learning and career frameworks through real life experience. <br>Prepare for your major and career by joining us!</p>
                         <p class="mb-0">
-                            <a href="https://michaelzhang1.typeform.com/to/LWIfVW1H?typeform-source=www.ai-camp.org" target="_blank" margin-bottom="20px" class="btn btn-text btn-white btn-circled">
+                            <a href="https://www.ai-camp.org/" target="_blank" margin-bottom="20px" class="btn btn-text btn-white btn-circled">
                                 Register for AI Camp
                             </a>
                         </p>
                 </div>
                 <div class="footer-widget footer-about">
-                    <h3>About</h3>
+                    <h3>About Joseph Yun</h3>
                     <!-- Links -->
                     <ul class="footer-links ">
                         <li>
                             <u>
-                            <a href="https://www.ai-camp.org/" target="_blank">
-                                AI Camp Website
-                            </a>
-                            </u>
-                        </li>
-                        <li>
-                            <u>
-                            <a href="https://www.ai-camp.org/terms-of-service" target="_blank">
-                                Terms of Services
-                            </a>
-                            </u>
-                        </li>
-                        <li>
-                            <u>
                             <a href="https://www.ai-camp.org/privacy-notice" target="_blank">
-                                Privacy Policy
-                            </a>
-                        </u>
-                        </li>
-                        <li>
-                            <u>
-                            <a href="https://www.ai-camp.org/faq" target="_blank">
-                                Frequently Asked Questions
+                                Github
                             </a>
                         </u>
                         </li>
@@ -175,13 +144,6 @@
                             <u>
                             <a href="mailto: hello@ai-camp.org" target="_blank">
                                 Contact
-                            </a>
-                        </u>
-                        </li>
-                        <li>
-                        <u>
-                            <a href="https://www.youtube.com/channel/UCUGJzo5EwViLGpAgYphNyzg/featured" target="_blank">
-                                YouTube
                             </a>
                         </u>
                         </li>
@@ -195,7 +157,7 @@
                 <div class="col-lg-12">
                     <!-- Copyright -->
                     <p class="footer-copy ">
-                        &copy; Copyright <span class="current-year">AI Camp</span> All rights reserved.
+                        &copy; Joseph Yun / <span class="current-year">AI Camp</span>. All rights Reserved.
                     </p>
                 </div>
             </div> <!-- / .row -->
@@ -210,7 +172,8 @@
         document.getElementById('seefood_button').addEventListener('click', openDialog);
 
         function openDialog() {
-            document.getElementById('seefood_input_field').click();
+            if (document.querySelectorAll('input[type="radio"]:checked').length === 0) alert("You gotta select a difficulty!");
+            else document.getElementById('seefood_input_field').click();
         }
     </script>
     <script type="text/javascript">
