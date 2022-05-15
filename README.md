@@ -3,9 +3,7 @@ Three levels of rock paper scissors ready to take you on!
 
 ### Quickstart Guide
 
-First clone this repository through 
-
-`https://github.com/organization-x/omni`
+First clone this repository,
 
 cd into the `/app` folder
 
